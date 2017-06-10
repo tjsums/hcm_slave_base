@@ -11,7 +11,7 @@ RUN groupadd -g ${gid} ${group} \
     && useradd -d "${JENKINS_AGENT_HOME}" -u "${uid}" -g "${gid}" -m -s /bin/bash "${user}" \
     && echo 'jenkins:jenkins' | chpasswd
 
-RUN chown -R jenkins:jenkins JENKINS_AGENT_HOME
+RUN chown -R jenkins:jenkins ${JENKINS_AGENT_HOME}
 ENV JENKINS_AGENT_HOME ${JENKINS_AGENT_HOME}
 # setup SSH server
 RUN apt-get update \
