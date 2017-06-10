@@ -7,12 +7,11 @@ ARG uid=1000
 ARG gid=1000
 ARG JENKINS_AGENT_HOME=/home/${user}
 
-ENV JENKINS_AGENT_HOME ${JENKINS_AGENT_HOME}
-
 RUN groupadd -g ${gid} ${group} \
     && useradd -d "${JENKINS_AGENT_HOME}" -u "${uid}" -g "${gid}" -m -s /bin/bash "${user}" \
     && echo 'jenkins:jenkins' | chpasswd
-
+    
+ENV JENKINS_AGENT_HOME ${JENKINS_AGENT_HOME}
 # setup SSH server
 RUN apt-get update \
     && apt-get install --no-install-recommends -y openssh-server sudo \
